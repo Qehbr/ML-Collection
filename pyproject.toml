@@ -1,0 +1,5 @@
+[tool.basedpyright]
+typeCheckingMode = "standard"
+autoSearchPaths = true
+diagnosticMode = "workspace",
+useLibraryCodeForTypes = true,
