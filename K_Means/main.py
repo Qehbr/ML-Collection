@@ -1,4 +1,5 @@
 import pandas as pd
+
 from K_Means.kmeans import K_Means
 from utils.utils import train_test_split
 
@@ -10,7 +11,7 @@ if __name__ == "__main__":
     if data_name == "breast_cancer":
         data.dropna(inplace=True, axis=1)
         X = data.drop(["diagnosis", "id"], axis=1)
-        y = data["diagnosis"].replace({"M": 1, "B": 0})
+        y = data["diagnosis"].map({"M": 1, "B": 0})
         task = "classification"
 
     elif data_name == "housing":

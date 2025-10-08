@@ -9,7 +9,7 @@ class LogisticRegression:
         self.weights: None | np.ndarray = None
         self.bias: np.floating = np.float64(0)
 
-    def _sigmoid(self, X: np.ndarray):
+    def _sigmoid(self, X: np.ndarray) -> np.ndarray:
         return 1 / (1 + np.exp(-X))
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:

@@ -1,12 +1,20 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 
 def train_test_split(
-    X: pd.DataFrame, y: pd.Series | pd.DataFrame, ratio: float = 0.8
+    X: pd.DataFrame,
+    y: pd.Series | pd.DataFrame,
+    ratio: float = 0.8,
+    random_state: int = -1,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     rows = X.shape[0]
-    shuffled_indices = np.random.permutation(rows)
+
+    if random_state != -1:
+        rng = np.random.default_rng(seed=random_state)
+        shuffled_indices = rng.permutation(rows)
+    else:
+        shuffled_indices = np.random.permutation(rows)
     X_shuffled, y_shuffled = X.iloc[shuffled_indices], y.iloc[shuffled_indices]
 
     split_idx = int(rows * ratio)

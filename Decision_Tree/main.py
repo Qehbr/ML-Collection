@@ -1,6 +1,6 @@
 import pandas as pd
 
-from KNN.knn import KNN
+from Decision_Tree.dt import DecisionTree
 from utils.utils import calculate_accuracy, calculate_mse_loss, train_test_split
 
 if __name__ == "__main__":
@@ -23,16 +23,11 @@ if __name__ == "__main__":
     else:
         raise ValueError("Correct data_name should be specified.")
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y)
-    mean = X_train.mean(axis=0)
-    std = X_train.std(axis=0)
-    X_train = (X_train - mean) / std
-    X_test = (X_test - mean) / std
-
-    model = KNN(k=50)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+    model = DecisionTree(max_depth=10, min_samples_split=10, criterion="mse", task=task)
     model.fit(X_train, y_train)
 
-    y_pred = model.predict(X_test, task=task)
+    y_pred = model.predict(X_test)
 
     if task == "regression":
         mse_loss = calculate_mse_loss(y_pred, y_test)
